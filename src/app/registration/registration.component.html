@@ -9,6 +9,19 @@
             class="form-control"
             placeholder="Név"
           />
+          <div
+            *ngIf="name?.errors?.['required'] && name?.dirty"
+            class="text-danger small mt-2"
+          >
+            Kötelező mező
+          </div>
+          <div
+            *ngIf="name?.errors?.['customNameInvalid'] && name?.dirty"
+            class="text-danger small mt-2"
+          >
+            A névnek kötelező szóközt tartalmaznia és min 2x3 karktert
+            tartalmaznia.
+          </div>
         </div>
         <div class="col-6 mt-2">
           <input
@@ -17,6 +30,12 @@
             class="form-control"
             placeholder="Cím"
           />
+          <div
+            *ngIf="address?.invalid && address?.dirty"
+            class="text-danger small mt-2"
+          >
+            Kötelező mező
+          </div>
         </div>
         <div class="col-6 mt-2">
           <select formControlName="country" class="form-control">
@@ -29,7 +48,13 @@
           <input type="checkbox" formControlName="subscription" />
           Feliratkozás
         </div>
-        <button class="btn btn-primary mt-2" type="submit">Registration</button>
+        <button
+          class="btn btn-primary mt-2"
+          type="submit"
+          [disabled]="!userAddForm.valid"
+        >
+          Registration
+        </button>
       </form>
     </div>
   </div>
